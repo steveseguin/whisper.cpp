@@ -713,11 +713,11 @@ bool read_wav(const std::string & fname, std::vector<float>& pcmf32, std::vector
         return false;
     }
 
-    const uint64_t n = wav_data.empty() ? wav.totalPCMFrameCount : wav_data.size()/(wav.channels*wav.bitsPerSample/8);
+    uint64_t n = wav_data.empty() ? wav.totalPCMFrameCount : wav_data.size()/(wav.channels*wav.bitsPerSample/8);
 
     std::vector<int16_t> pcm16;
     pcm16.resize(n*wav.channels);
-    drwav_read_pcm_frames_s16(&wav, n, pcm16.data());
+    n = drwav_read_pcm_frames_s16(&wav, n, pcm16.data());
     drwav_uninit(&wav);
 
     // convert to mono, float

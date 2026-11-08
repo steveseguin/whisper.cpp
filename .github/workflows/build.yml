@@ -5,6 +5,16 @@ env:
   ubuntu_image: "ubuntu:22.04"
 
 jobs:
+  read-wav:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone
+        uses: actions/checkout@v4
+
+      - name: Test WAV reader
+        run: python3 tests/test-read-wav.py -v
+
   ubuntu-latest:
     runs-on: ubuntu-latest
 
